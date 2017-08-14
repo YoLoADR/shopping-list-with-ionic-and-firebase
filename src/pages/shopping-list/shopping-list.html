@@ -6,8 +6,14 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>ShoppingList</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Shopping List</ion-title>
+    <!--attribut "end"  pour qu'il se trouve à la fin de la navbar-->
+    <ion-buttons end>
+      <button ion-button icon-only (click)="navigateToAddShoppingPage()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
