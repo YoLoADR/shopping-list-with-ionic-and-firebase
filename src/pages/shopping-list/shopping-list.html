@@ -20,5 +20,11 @@
 
 
 <ion-content padding>
-
+  <ion-list>
+    <!-- (+) Comme c'est un observable on a besoin de mettre le "async" pipe-->
+    <ion-item *ngFor="let item of shoppingListRef$ | async">
+      <h2> Item Name : {{item.itemName}}</h2>
+      <h3> Amount : {{item.itemNumber}}</h3>
+    </ion-item>
+  </ion-list>
 </ion-content>
