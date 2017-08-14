@@ -1,4 +1,5 @@
 export interface ShoppingItem {
   itemName: string;
   itemNumber: number;
+  $key?: string;
 }
