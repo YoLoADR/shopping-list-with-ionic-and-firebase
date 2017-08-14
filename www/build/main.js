@@ -42,6 +42,7 @@ webpackEmptyAsyncContext.id = 184;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_shopping_add_shopping__ = __webpack_require__(266);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(230);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -54,10 +55,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ShoppingListPage = (function () {
-    function ShoppingListPage(navCtrl, navParams) {
+    function ShoppingListPage(navCtrl, navParams, angularFireDatabase) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.angularFireDatabase = angularFireDatabase;
+        /**
+         * shoppingListRef pointe vers Firbase -> 'shopping-list'.
+         * Pas seulement pour lire mais aussi pour ecrire (via .push)
+         */
+        this.shoppingListRef$ = this.angularFireDatabase.list('shopping-list');
+        this.shoppingListRef$.subscribe(function (data) { return console.log("data", data); });
     }
     ShoppingListPage.prototype.navigateToAddShoppingPage = function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__add_shopping_add_shopping__["a" /* AddShoppingPage */]);
@@ -66,12 +75,13 @@ var ShoppingListPage = (function () {
 }());
 ShoppingListPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-shopping-list',template:/*ion-inline-start:"/Users/yatticot/Documents/laboratoire/shopping-list-with-ionic-and-firebase/src/pages/shopping-list/shopping-list.html"*/'<!--\n  Generated template for the ShoppingListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Shopping List</ion-title>\n    <!--attribut "end"  pour qu\'il se trouve à la fin de la navbar-->\n    <ion-buttons end>\n      <button ion-button icon-only (click)="navigateToAddShoppingPage()">\n        <ion-icon name="add"></ion-icon>\n      </button>\n    </ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"/Users/yatticot/Documents/laboratoire/shopping-list-with-ionic-and-firebase/src/pages/shopping-list/shopping-list.html"*/,
+        selector: 'page-shopping-list',template:/*ion-inline-start:"/Users/yatticot/Documents/laboratoire/shopping-list-with-ionic-and-firebase/src/pages/shopping-list/shopping-list.html"*/'<!--\n  Generated template for the ShoppingListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Shopping List</ion-title>\n    <!--attribut "end"  pour qu\'il se trouve à la fin de la navbar-->\n    <ion-buttons end>\n      <button ion-button icon-only (click)="navigateToAddShoppingPage()">\n        <ion-icon name="add"></ion-icon>\n      </button>\n    </ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-list>\n    <!-- (+) Comme c\'est un observable on a besoin de mettre le "async" pipe-->\n    <ion-item *ngFor="let item of shoppingListRef$ | async">\n      <h2> Item Name : {{item.itemName}}</h2>\n      <h3> Amount : {{item.itemNumber}}</h3>\n    </ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/yatticot/Documents/laboratoire/shopping-list-with-ionic-and-firebase/src/pages/shopping-list/shopping-list.html"*/,
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */],
+        __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["a" /* AngularFireDatabase */]])
 ], ShoppingListPage);
 
-var _a, _b;
 //# sourceMappingURL=shopping-list.js.map
 
 /***/ }),
